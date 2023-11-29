@@ -22,7 +22,7 @@ population_data = population_data.to_crs(epsg=3857)
 # plt.show()
 
 
-n_clusters = 30  # specify the number of clusters
+n_clusters = 300  # specify the number of clusters
 # Extract coordinates for clustering
 coords = population_data.geometry.apply(lambda geom: (geom.x, geom.y)).tolist()
 
@@ -37,7 +37,8 @@ fig, ax = plt.subplots(figsize=(10, 10))
 
 # Plot each centroid
 for centroid in centroids:
-    ax.plot(centroid[0], centroid[1], 'o', markersize=10)  # Adjust the marker size as needed
+    ax.plot(centroid[0], centroid[1], 'o', markersize=3)  # Adjust the marker size as needed
+
 
 # Add a basemap
 ctx.add_basemap(ax)
