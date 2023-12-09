@@ -3,11 +3,13 @@ import matplotlib.pyplot as plt
 import contextily as ctx
 from sklearn.cluster import KMeans
 
-
-
 # Read the Shapefile
-population_shp = './random_population_points2.shp'
-population_data = gpd.read_file(population_shp)
+population_shp1 = './newshp1/population10000.shp'
+population_shp2 = './newshp2/population1000.shp'
+population_shp3 = './newshp3/1.shp'
+
+population_data = gpd.read_file(population_shp3)
+# print(population_data)
 
 # Ensure the data is in Web Mercator projection for contextily basemap
 population_data = population_data.to_crs(epsg=3857)
@@ -22,7 +24,7 @@ population_data = population_data.to_crs(epsg=3857)
 # plt.show()
 
 
-n_clusters = 300  # specify the number of clusters
+n_clusters = 100  # specify the number of clusters
 # Extract coordinates for clustering
 coords = population_data.geometry.apply(lambda geom: (geom.x, geom.y)).tolist()
 
@@ -32,6 +34,9 @@ kmeans = KMeans(n_clusters=n_clusters, random_state=0).fit(coords)
 # Get centroids of each cluster
 centroids = kmeans.cluster_centers_
 
+with open('coord.txt', 'w') as file:
+    for centroid in centroids:
+        file.write(f"{centroid[0]}, {centroid[1]}\n")
 # Plotting
 fig, ax = plt.subplots(figsize=(10, 10))
 

@@ -1,5 +1,6 @@
 # NEUBusRoutes
-
+To get started:
+```pip install networkx contextily sklearn geopandas```
 
 
 # Seminar handout: 
